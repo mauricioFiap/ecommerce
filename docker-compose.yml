@@ -1,0 +1,66 @@
+version: '3.8'
+services:
+  carrinho:
+    build:
+      context: ./carrinho
+    ports:
+      - "8082:8082"
+    networks:
+      - my_network
+  postgres-carrinho:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: carrinhoDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - my_network
+  controleacesso:
+    build:
+      context: ./controleacesso
+    ports:
+      - "8081:8081"
+    networks:
+      - my_network
+  postgres-controleacesso:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: controleacessoDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+    - my_network
+  gestaoitens:
+    build:
+      context: ./gestaoitens
+    ports:
+      - "8083:8083"
+    networks:
+      - my_network
+  postgres-gestaoitens:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: gestaoitensDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+    - my_network
+  pagamento:
+    build:
+      context: ./pagamento
+    ports:
+      - "8084:8084"
+    networks:
+      - my_network
+  postgres-pagamento:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: pagamentoDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+    - my_network
+    
+
+networks:
+  my_network:
